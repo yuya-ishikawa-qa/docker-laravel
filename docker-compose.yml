@@ -9,7 +9,7 @@ services:
     links:
       - db
     volumes:
-      - "./lara-d/:/var/www/html"
+      - "./:/var/www/html"
       - "./apache-php/apache.conf:/etc/httpd/conf/httpd.conf"
     container_name: "apache-php"
   db:
