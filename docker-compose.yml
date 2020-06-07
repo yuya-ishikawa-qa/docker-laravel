@@ -1,0 +1,31 @@
+version: "3"
+services:
+  web:
+    build:
+      context: ./apache-php
+    ports: 
+      - 80:80
+    privileged: true
+    links:
+      - db
+    volumes:
+      - "./lara-d/:/var/www/html"
+      - "./apache-php/apache.conf:/etc/httpd/conf/httpd.conf"
+    container_name: "apache-php"
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    container_name: "mysql5.7"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    links:
+      - db
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=db
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+    container_name: "phpmyamin-la"
