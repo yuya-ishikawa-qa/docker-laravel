@@ -11,12 +11,8 @@ RUN yum -y install --enablerepo=remi,remi-php74 php php-mbstring php-mysqlnd php
 RUN yum -y install zip unzip
 RUN curl -sL https://rpm.nodesource.com/setup_14.x | bash -
 RUN yum -y install nodejs
-# node command
-COPY --from=node:14.16 /usr/local/bin /usr/local/bin
-# npm command
-COPY --from=node:14.16 /usr/local/lib /usr/local/lib
-# yarn command
-COPY --from=node:14.16 /opt /opt
+
+RUN npm -v
 
 # composerをインストール
 RUN curl -sS https://getcomposer.org/installer | php
